@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    data_extraction_rules.xml
+    Defines which files/directories are included or excluded from
+    cloud backups (Android 12+ cloud backup API).
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- Exclude SharedPreferences from cloud backup to avoid
+             stale ringtone URIs on a new device. -->
+        <exclude
+            domain="sharedpref"
+            path="ringtone_shuffler_prefs.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude
+            domain="sharedpref"
+            path="ringtone_shuffler_prefs.xml" />
+    </device-transfer>
+</data-extraction-rules>

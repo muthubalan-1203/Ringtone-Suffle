@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    backup_rules.xml
+    Controls which files are included/excluded from Auto Backup (pre-Android 12).
+-->
+<full-backup-content>
+    <!-- Exclude SharedPreferences — URIs are device-specific -->
+    <exclude
+        domain="sharedpref"
+        path="ringtone_shuffler_prefs.xml" />
+</full-backup-content>
