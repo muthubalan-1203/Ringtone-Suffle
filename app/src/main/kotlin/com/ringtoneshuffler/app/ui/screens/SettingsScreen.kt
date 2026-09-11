@@ -49,6 +49,7 @@ import com.ringtoneshuffler.app.data.PrefsHelper
 import com.ringtoneshuffler.app.ui.components.AlgorithmSelector
 import com.ringtoneshuffler.app.ui.components.PermissionBadge
 import com.ringtoneshuffler.app.ui.components.PermissionStatus
+import com.ringtoneshuffler.app.ui.theme.ElectricViolet
 import com.ringtoneshuffler.app.ui.theme.ElectricVioletDark
 import com.ringtoneshuffler.app.ui.theme.ElectricVioletLight
 import com.ringtoneshuffler.app.ui.theme.ErrorRedBright
@@ -149,6 +150,7 @@ fun SettingsScreen(
             // ── Options ───────────────────────────────────────────────────────
             SettingsSection(title = "Options") {
                 val fadeInEnabled by viewModel.fadeInEnabled.collectAsState()
+                val fadeInDuration by viewModel.fadeInDuration.collectAsState()
                 
                 ToggleRow(
                     label = "Fade-in Ringtone",
@@ -156,6 +158,26 @@ fun SettingsScreen(
                     checked = fadeInEnabled,
                     onCheckedChange = { viewModel.setFadeInEnabled(it) }
                 )
+                
+                if (fadeInEnabled) {
+                    Spacer(Modifier.height(4.dp))
+                    Text(
+                        text = "Fade Duration: $fadeInDuration seconds",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = OnSurfaceVariant
+                    )
+                    androidx.compose.material3.Slider(
+                        value = fadeInDuration.toFloat(),
+                        onValueChange = { viewModel.setFadeInDuration(it.toInt()) },
+                        valueRange = 1f..10f,
+                        steps = 8,
+                        colors = androidx.compose.material3.SliderDefaults.colors(
+                            thumbColor = ElectricVioletLight,
+                            activeTrackColor = ElectricViolet,
+                            inactiveTrackColor = SurfaceContainerHigh
+                        )
+                    )
+                }
                 SectionDivider()
                 ToggleRow(
                     label = "Skip repeated ringtones",
